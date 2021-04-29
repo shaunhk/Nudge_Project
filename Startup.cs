@@ -22,6 +22,22 @@ namespace NVS_Project
         public void ConfigureServices(IServiceCollection services)
         {
 
+
+            //Aidan - Enable CORS
+            services.AddCors(c => 
+            {
+                c.AddPolicy("AllowOrigin", options=>options.AllowAnyOrigin().AllowAnyMethod()
+                .AllowAnyHeader());
+            });
+
+
+            //JSON Serializer 
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson();
+
+
+
+
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory

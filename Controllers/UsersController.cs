@@ -26,6 +26,7 @@ namespace NVS_Project.Controllers
         [Route("api/users")]
         public IEnumerable<Models.userDetails> GetAllUsers()
         {
+            
             return repository.GetAll();
         }
 
@@ -36,7 +37,5 @@ namespace NVS_Project.Controllers
         {
             return repository.Add(item);
         }
-        
-
     }
 }
