@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace groupbackend.Models
+namespace NVS_Project.Models
 {
     public class userDetails
     {

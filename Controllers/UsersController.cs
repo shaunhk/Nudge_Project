@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace groupbackend.Controllers
+namespace NVS_Project.Controllers
 {
     [ApiController]
     public class UsersController : ControllerBase

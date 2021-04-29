@@ -1,6 +1,6 @@
 using System;
 
-namespace groupbackend.Models
+namespace NVS_Project.Models
 {
     public class ErrorViewModel
     {
