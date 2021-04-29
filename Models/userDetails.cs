@@ -30,6 +30,7 @@ namespace NVS_Project.Models
     {
 
         Regex r = new Regex("^[a-zA-Z]+$");
+        Regex n = new Regex("[^0-9]");
 
 
         //no entries can be blank
@@ -84,6 +85,14 @@ namespace NVS_Project.Models
         if (!r.IsMatch(this.lastName))
         {
             Console.WriteLine("Last name must only contain letters");
+        }
+
+
+
+        //Student ID only contains numbers
+        if (!n.IsMatch(this.studentID))
+        {
+            Console.WriteLine("Student ID must only contain numbers");
         }
     }
         

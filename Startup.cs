@@ -31,6 +31,7 @@ namespace NVS_Project
             });
 
 
+
             //JSON Serializer 
             services.AddControllersWithViews()
                 .AddNewtonsoftJson();
