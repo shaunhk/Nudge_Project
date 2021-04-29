@@ -24,7 +24,7 @@ namespace NVS_Project.Controllers
 
         [HttpGet]
         [Route("api/users")]
-        public IEnumerable<Models.userDetails> GetAllUsers()
+        public IEnumerable<Models.userDetails> Get()
         {
             return repository.GetAll();
         }
