@@ -16,26 +16,11 @@ namespace NVS_Project
         }
 
 
-
-        public IConfiguration Configuration { get; }
+  public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            //Aidan - Enable CORS
-            services.AddCors(c => 
-            {
-                c.AddPolicy("AllowOrigin", options=>options.AllowAnyOrigin().AllowAnyMethod()
-                .AllowAnyHeader());
-            });
-
-
-            //JSON Serializer 
-            services.AddControllersWithViews()
-                .AddNewtonsoftJson();
-
-
 
             services.AddControllersWithViews();
 
@@ -45,6 +30,7 @@ namespace NVS_Project
                 configuration.RootPath = "ClientApp/build";
             });
         }
+
 
 
 

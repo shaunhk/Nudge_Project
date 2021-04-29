@@ -10,9 +10,9 @@ namespace NVS_Project.Models
 
         public UserRepository()
         {
-            Add(new userDetails { firstName= "first1", lastName="last1", email=1});
-            Add(new userDetails { firstName= "first2", lastName="last2", email=2});
-            Add(new userDetails { firstName= "first3", lastName="last3", email=3});
+            Add(new userDetails { firstName= "first1", lastName="last1", gender= "female"});
+            Add(new userDetails { firstName= "first2", lastName="last2", gender="female"});
+            Add(new userDetails { firstName= "first3", lastName="last3", gender="female"});
         }
 
         public IEnumerable<userDetails> GetAll()
