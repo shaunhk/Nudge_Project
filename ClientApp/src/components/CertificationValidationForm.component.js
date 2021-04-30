@@ -10,18 +10,23 @@ class CertificationValidationForm extends React.Component {
             firstName : "",
             lastName : "",
             DOB : "",
-            institutionID : "",
+            institution : {id : ""},
             yearOfAward: "",
             courseName: "",
             qualificationType: "",
             classification: "",
-
         }
     }
 
     onFormInputChange = (name) => (event) => {   
-        this.setState({ [name]: event.target.value });
-        console.log(event.target.value);       
+        if (name != "institution"){
+            this.setState({ [name]: event.target.value });
+        } else{
+            this.setState({institution : {id : event.target.value}})
+        }
+        console.log(event.target.value);
+        console.log(name)
+               
     };
 
     onFormSubmit = () => (event) => {
@@ -57,7 +62,7 @@ class CertificationValidationForm extends React.Component {
                 </div>
                 <div className="mb-20 row form-group">
                     <div className="col">
-                        <input id="institutionID" name="institutionID" data-testid="institutionID" placeholder="INSTITUTION ID" type="text" className="form-control" aria-invalid="false" value={this.state.institutionID} onChange={this.onFormInputChange('institutionID')}></input>
+                        <input id="institution" name="institution" data-testid="institution" placeholder="INSTITUTION ID" type="text" className="form-control" aria-invalid="false" value={this.state.institution.id} onChange={this.onFormInputChange('institution')}></input>
                     </div>
                 </div>
                 <div className="form-group mb-20">
