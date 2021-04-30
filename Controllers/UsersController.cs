@@ -24,19 +24,19 @@ namespace NVS_Project.Controllers
 
         [HttpGet]
         [Route("api/users")]
-        public IEnumerable<Models.userDetails> GetAllUsers()
+        public IEnumerable<Models.userDetails> Get()
         {
+
             return repository.GetAll();
         }
 
         [HttpPost]
         [Route("api/user")]
         [Consumes("application/json")]
-        public Models.userDetails PostUser(Models.userDetails item)
+        public IActionResult PostUser(Models.userDetails userInfo)
         {
-            return repository.Add(item);
+            var result = userInfo; 
+            return Ok(result);
         }
-        
-
     }
 }

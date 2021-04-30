@@ -1,6 +1,7 @@
 import React from "react";
 
 class CertificationValidationForm extends React.Component {
+    
     constructor(props) {
         super(props);
 
@@ -9,29 +10,34 @@ class CertificationValidationForm extends React.Component {
             lastName : "",
             gender : "GENDER",
             DOB : "",
-            instatutionName : "",
+            institutionName : "",
             studentID : "",
             course : "",
             gradYear : ""
         }
     }
 
-    onFormInputChange = (name) => (event) => {
+    onFormInputChange = (name) => (event) => {   
         this.setState({ [name]: event.target.value });
-        console.log(event.target.value);
+        console.log(event.target.value);       
     };
 
     onFormSubmit = () => (event) => {
         event.preventDefault();
 
-        fetch("https://ptsv2.com/t/gpq0i-1619372316/post", {
+        fetch("http://localhost:5000/api/user", {
             method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(this.state)
         })
             .then(response => response.text())
             .then(text => console.log(text));
 
     };
+
+
 
     render() {
         return (
@@ -60,7 +66,7 @@ class CertificationValidationForm extends React.Component {
                 </div>
                 <div className="mb-20 row form-group">
                     <div className="col">
-                        <input id="institutionName" name="institutionName" data-testid="institutionName" placeholder="INSTITUTION NAME" type="text" className="form-control" aria-invalid="false" value={this.state.instatutionName} onChange={this.onFormInputChange('instatutionName')}></input>
+                        <input id="institutionName" name="institutionName" data-testid="institutionName" placeholder="INSTITUTION NAME" type="text" className="form-control" aria-invalid="false" value={this.state.institutionName} onChange={this.onFormInputChange('institutionName')}></input>
                     </div>
                 </div>
                 <div className="mb-20 row form-group">
