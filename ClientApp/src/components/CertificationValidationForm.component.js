@@ -15,17 +15,43 @@ class CertificationValidationForm extends React.Component {
             courseName: "",
             qualificationType: "",
             classification: "",
+            documents: []
         }
     }
 
+    getBase64(file, cb) {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+            cb(reader.result)
+        };
+        reader.onerror = function (error) {
+            console.log('Error: ', error);
+        };
+    }
+
     onFormInputChange = (name) => (event) => {   
-        if (name != "institution"){
-            this.setState({ [name]: event.target.value });
-        } else{
+        if (name == "institution"){
             this.setState({institution : {id : event.target.value}})
+        } else if (name == "file"){
+            let selectedFile = event.target.files[0];
+            this.getBase64(selectedFile, (result) => {
+
+                this.state.documents.push(
+                    {
+                        name: selectedFile.name,
+                        type: "consent-form",
+                        content: result,
+                        format: "PDF"
+                    }        
+                )
+            }); 
+            
+        } else {
+            this.setState({ [name]: event.target.value });
         }
-        console.log(event.target.value);
-        console.log(name)
+        //console.log(event.target.value);
+        //console.log(name)
                
     };
 
@@ -58,6 +84,7 @@ class CertificationValidationForm extends React.Component {
                 </div>
                 <div className="form-group mb-20">
                     {/* TODO: needs lable */}
+                    <p>Date of Birth</p>
                     <input id="DOB" name="DOB" placeholder="DATE OF BIRTH"  data-testid="DOB" type="date" className="form-control" aria-invalid="false" value={this.state.DOB} onChange={this.onFormInputChange('DOB')}></input>
                 </div>
                 <div className="mb-20 row form-group">
@@ -67,7 +94,8 @@ class CertificationValidationForm extends React.Component {
                 </div>
                 <div className="form-group mb-20">
                     {/* TODO: needs lable */}
-                    <input id="yearOfAward" name="yearOfAward" placeholder="GRADUATION YEAR"  data-testid="yearOfAward" type="date" className="form-control" aria-invalid="false" value={this.state.yearOfAward} onChange={this.onFormInputChange('yearOfAward')}></input>
+                    <p>Year Awarded</p>
+                    <input id="yearOfAward" name="yearOfAward" placeholder="YEAR AWARDED"  data-testid="yearOfAward" type="date" className="form-control" aria-invalid="false" value={this.state.yearOfAward} onChange={this.onFormInputChange('yearOfAward')}></input>
                 </div>
                 <div className="mb-20 row form-group">
                     <div className="col">
@@ -82,6 +110,11 @@ class CertificationValidationForm extends React.Component {
                 <div className="mb-20 row form-group">
                     <div className="col">
                         <input id="classification" name="classification" data-testid="classification" placeholder="CLASSIFICATION TYPE" type="text" className="form-control" aria-invalid="false" value={this.state.classification} onChange={this.onFormInputChange('classification')}></input>
+                    </div>
+                </div>
+                <div className="mb-20 row form-group">
+                    <div className="col">
+                        <input type="file" name="file" onChange={this.onFormInputChange('file')} />
                     </div>
                 </div>
                 <div className="form-group mb-20 justify-content-center">

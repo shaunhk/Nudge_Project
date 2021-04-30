@@ -27,6 +27,9 @@ namespace NVS_Project.Models
 
         public string classification { get; set; }
 
+        // https://stackoverflow.com/questions/21578814/how-to-receive-json-as-an-mvc-5-action-method-parameter
+        public List<document> documents { get; set;  }
+
     }
 
     public class institution 
@@ -34,6 +37,18 @@ namespace NVS_Project.Models
       public int id {get; set;}
     }
 
-}
+    public class document
+    {
 
+        public string name { get; set; }
+
+        public string type { get; set; }
+
+        public string content { get; set; }
+
+        public string format { get; set; }
+    }
+
+
+}
     
