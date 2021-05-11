@@ -37,19 +37,19 @@ namespace NVS_Project.Controllers
         [Consumes("application/json")]
         public IActionResult PostUser(Models.userDetails userInfo)
         {
-            string url = "https://apitest.hedd.ac.uk:8443";
+            string url = "https://apitest.hedd.ac.uk:8443/enquiries/verify";
 
             var serializedContents = JsonSerializer.Serialize(userInfo);
 
-            /*
+            
             using (var client = new WebClient())
             {
-                client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                //client.Headers["Authorization"] = "1DTLNLZ9PS2YLD0KOMKZ1DTLNLZ9PS2YLD0KOMK";
+                Client.Headers.Add("Authentication-Token", "00B07655-E61F-4A4E-BDF7-4DC61A4BA8DF");
+                Client.Header.Add("Content-Type", "application/json")
                 string s = client.UploadString(url, serializedContents);
                 Console.WriteLine(s);
             }
-            */
+            
             return Ok(serializedContents);
             //var result = userInfo; 
             //return Ok(result);
