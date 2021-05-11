@@ -44,8 +44,8 @@ namespace NVS_Project.Controllers
             
             using (var client = new WebClient())
             {
-                Client.Headers.Add("Authentication-Token", "00B07655-E61F-4A4E-BDF7-4DC61A4BA8DF");
-                Client.Header.Add("Content-Type", "application/json")
+                client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                client.Headers["Authentication-Token"] = "00B07655E61F4A4EBDF74DC61A4BA8DF";
                 string s = client.UploadString(url, serializedContents);
                 Console.WriteLine(s);
             }
