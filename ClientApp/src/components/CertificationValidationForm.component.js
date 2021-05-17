@@ -95,7 +95,7 @@ class CertificationValidationForm extends React.Component {
                 <div className="form-group mb-20">
                     {/* TODO: needs lable */}
                     <p>Year Awarded</p>
-                    <input id="yearOfAward" name="yearOfAward" placeholder="YEAR AWARDED"  data-testid="yearOfAward" type="date" className="form-control" aria-invalid="false" value={this.state.yearOfAward} onChange={this.onFormInputChange('yearOfAward')}></input>
+                    <input id="yearOfAward" name="yearOfAward" placeholder="YEAR AWARDED"  data-testid="yearOfAward" type="number" className="form-control" aria-invalid="false" value={this.state.yearOfAward} onChange={this.onFormInputChange('yearOfAward')}></input>
                 </div>
                 <div className="mb-20 row form-group">
                     <div className="col">

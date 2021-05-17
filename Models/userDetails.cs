@@ -11,6 +11,8 @@ namespace NVS_Project.Models
 
         }
 
+        public string enquirytype { get; set; }
+
         public string firstName { get; set; }
 
         public string lastName { get; set; }
