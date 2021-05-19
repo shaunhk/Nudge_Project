@@ -1,16 +1,16 @@
 import React from "react";
 
 class CertificationValidationForm extends React.Component {
-    
+
     constructor(props) {
         super(props);
 
         this.state = {
             enquirytype: "graduated",
-            firstName : "",
-            lastName : "",
-            DOB : "",
-            institution : {id : ""},
+            firstName: "",
+            lastName: "",
+            DOB: "",
+            institution: { id: "" },
             yearOfAward: "",
             courseName: "",
             qualificationType: "",
@@ -30,10 +30,10 @@ class CertificationValidationForm extends React.Component {
         };
     }
 
-    onFormInputChange = (name) => (event) => {   
-        if (name == "institution"){
-            this.setState({institution : {id : event.target.value}})
-        } else if (name == "file"){
+    onFormInputChange = (name) => (event) => {
+        if (name == "institution") {
+            this.setState({ institution: { id: event.target.value } })
+        } else if (name == "file") {
             let selectedFile = event.target.files[0];
             this.getBase64(selectedFile, (result) => {
 
@@ -41,18 +41,18 @@ class CertificationValidationForm extends React.Component {
                     {
                         name: selectedFile.name,
                         type: "consent-form",
-                        content: result,
+                        content: result.split("data:application/pdf;base64,")[1],
                         format: "PDF"
-                    }        
+                    }
                 )
-            }); 
-            
+            });
+
         } else {
             this.setState({ [name]: event.target.value });
         }
         //console.log(event.target.value);
         //console.log(name)
-               
+
     };
 
     onFormSubmit = () => (event) => {
@@ -85,7 +85,7 @@ class CertificationValidationForm extends React.Component {
                 <div className="form-group mb-20">
                     {/* TODO: needs lable */}
                     <p>Date of Birth</p>
-                    <input id="DOB" name="DOB" placeholder="DATE OF BIRTH"  data-testid="DOB" type="date" className="form-control" aria-invalid="false" value={this.state.DOB} onChange={this.onFormInputChange('DOB')}></input>
+                    <input id="DOB" name="DOB" placeholder="DATE OF BIRTH" data-testid="DOB" type="date" className="form-control" aria-invalid="false" value={this.state.DOB} onChange={this.onFormInputChange('DOB')}></input>
                 </div>
                 <div className="mb-20 row form-group">
                     <div className="col">
@@ -95,7 +95,7 @@ class CertificationValidationForm extends React.Component {
                 <div className="form-group mb-20">
                     {/* TODO: needs lable */}
                     <p>Year Awarded</p>
-                    <input id="yearOfAward" name="yearOfAward" placeholder="YEAR AWARDED"  data-testid="yearOfAward" type="number" className="form-control" aria-invalid="false" value={this.state.yearOfAward} onChange={this.onFormInputChange('yearOfAward')}></input>
+                    <input id="yearOfAward" name="yearOfAward" placeholder="YEAR AWARDED" data-testid="yearOfAward" type="number" className="form-control" aria-invalid="false" value={this.state.yearOfAward} onChange={this.onFormInputChange('yearOfAward')}></input>
                 </div>
                 <div className="mb-20 row form-group">
                     <div className="col">
@@ -126,4 +126,4 @@ class CertificationValidationForm extends React.Component {
     }
 }
 
-export default  CertificationValidationForm;
+export default CertificationValidationForm;
