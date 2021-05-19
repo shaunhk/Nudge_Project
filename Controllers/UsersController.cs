@@ -101,7 +101,7 @@ namespace NVS_Project.Controllers
                 }
                 catch (WebException e)
                 {
-                    //The following error handling should be more helpful for debugging in development stage, remove for optimisation in production
+                    //The following error handling should be more helpful for debugging in development stage
                     Console.WriteLine("This program is expected to throw WebException on successful run." +
                               "\n\nException Message :" + e.Message);
                     if (e.Status == WebExceptionStatus.ProtocolError)
