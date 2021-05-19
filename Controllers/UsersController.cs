@@ -11,6 +11,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json.Linq;
 using NVS_Project.Models;
+using System.IO;
 
 namespace NVS_Project.Controllers
 {
@@ -45,12 +46,12 @@ namespace NVS_Project.Controllers
 
             // Below is method attempted, didnt work
             /*
-            JObject rss =
-                new JObject(
+            var rss =
+                new JObjec(
                     new JProperty("enquiry-type", userInfo.enquirytype),
                     new JProperty("first-names", userInfo.firstName),
                     new JProperty("last-name", userInfo.lastName),
-                    new JProperty("date-of-birth", userInfo.DOB.ToString("yyyy-MM-dd"),
+                    new JProperty("date-of-birth", userInfo.DOB
                     new JProperty("institution",
                         new JObject(
                             new JProperty("id", userInfo.institution.id)
@@ -69,24 +70,25 @@ namespace NVS_Project.Controllers
                         )))
                 ));
             */
-
             // This is the closest to it working
-            string json = "{enquiry-type: '"+userInfo.enquirytype + "'," +
-                "first-names: '" + userInfo.firstName + "'," +
-                "last-name: '" + userInfo.lastName + "'," +
-                "date-of-birth: '" + userInfo.DOB.ToString("yyyy-MM-dd") + "'," +
-                "institution : {id: '" + userInfo.institution.id + "'," +
-                "year-of-award: '" + userInfo.yearOfAward + "'," +
-                "course-name: '"+ userInfo.courseName + "'," +
-                "qualification-type: '"+ userInfo.qualificationType + "'," +
-                "classification: '"+ userInfo.classification + "'," +
-                "documents: [{ name: '"+ userInfo.documents[0].name + "'," +
-                "type: '" + userInfo.documents[0].type + "'," +
-                "content: '" + userInfo.documents[0].content + "'," +
-                "format: '" + userInfo.documents[0].format + "' }]  }";
 
-            //var serializedContents = JsonSerializer.Serialize(json);
-            Console.WriteLine(json);
+            //Console.WriteLine(serializedContents);
+
+
+            var preparedUser = new Dictionary<string, object>
+            {
+                { "enquiry-type", userInfo.enquirytype },
+                {"first-names", userInfo.firstName },
+                {"last-name", userInfo.lastName },
+                {"date-of-birth", userInfo.DOB },
+                {"institution",userInfo.institution },
+                {"year-of-award", userInfo.yearOfAward },
+                {"course-name", userInfo.courseName },
+                {"qualification-type", userInfo.qualificationType },
+                {"classification", userInfo.classification },
+                {"documents", userInfo.documents }
+            };
+            var serializedContents = JsonSerializer.Serialize(preparedUser);
 
             using (var client = new System.Net.WebClient())
             {
@@ -94,10 +96,22 @@ namespace NVS_Project.Controllers
                 client.Headers.Add("api-key", "00B07655-E61F-4A4E-BDF7-4DC61A4BA8DF");
                 try
                 {
-                    client.UploadString(url, json);
-                    return Ok(json);
-                } catch {
-                    throw;
+                    client.UploadString(url, serializedContents);
+                    return Ok();
+                }
+                catch (WebException e)
+                {
+                    //The following error handling should be more helpful for debugging in development stage
+                    Console.WriteLine("This program is expected to throw WebException on successful run." +
+                              "\n\nException Message :" + e.Message);
+                    if (e.Status == WebExceptionStatus.ProtocolError)
+                    {
+                        Console.WriteLine("Status Code : {0}", ((HttpWebResponse)e.Response).StatusCode);
+                        Console.WriteLine("Status Description : {0}", ((HttpWebResponse)e.Response).StatusDescription);
+                        StreamReader r = new StreamReader(((HttpWebResponse)e.Response).GetResponseStream());
+                        Console.WriteLine("Content: {0}", r.ReadToEnd());
+                    }
+                    return (BadRequest());
                 }
             }
 

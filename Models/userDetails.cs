@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -10,33 +11,33 @@ namespace NVS_Project.Models
         {
 
         }
-
         public string enquirytype { get; set; }
 
         public string firstName { get; set; }
 
         public string lastName { get; set; }
 
-        public DateTime DOB { get; set; }
+        //changed to string for simplification, datetime also returns time
+        public string DOB { get; set; }
 
         public virtual institution institution { get; set; }
 
         public string courseName { get; set; }
 
-        public string yearOfAward { get; set; }
+        public int yearOfAward { get; set; }
 
         public string qualificationType { get; set; }
 
         public string classification { get; set; }
 
         // https://stackoverflow.com/questions/21578814/how-to-receive-json-as-an-mvc-5-action-method-parameter
-        public List<document> documents { get; set;  }
+        public List<document> documents { get; set; }
 
     }
 
-    public class institution 
+    public class institution
     {
-      public int id {get; set;}
+        public int id { get; set; }
     }
 
     public class document
@@ -53,4 +54,3 @@ namespace NVS_Project.Models
 
 
 }
-    
